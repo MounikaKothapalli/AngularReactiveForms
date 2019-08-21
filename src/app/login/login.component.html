@@ -1,0 +1,37 @@
+<div class="col-sm-6 col-sm-offset-3">
+        <div class="panel panel-primary" >
+            <div class="panel-heading">
+                Login
+            </div>
+            <div class="panel-body">
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                  <div class="row form-group" [ngClass]="{ 'has-error':(loginForm.get('email').touched ||loginForm.get('email').dirty) &&
+                  !loginForm.get('email').valid}">
+                        <div class="col-md-12">
+                    <input type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" formControlName="email" placeholder="Email" required>
+                    <div *ngIf="loginForm.get('email').errors && loginForm.controls['email'].touched" class="help-block">
+                            <div [hidden]="!loginForm.controls['email'].errors.required">Email is required.</div>
+                            <div [hidden]="!loginForm.controls['email'].errors.pattern">Email is invalid.</div>
+                          </div>
+                </div>
+                </div>
+                <div class="row form-group" [ngClass]="{ 'has-error':(loginForm.get('password').touched ||loginForm.get('password').dirty) &&
+                !loginForm.get('password').valid}" >
+                     <div class="col-md-12">
+                    <input type="password" class="form-control"  formControlName="password" placeholder="Password" required>
+                    <div *ngIf="loginForm.get('password').errors && loginForm.controls['password'].touched" class="help-block">
+                            <div [hidden]="!loginForm.controls['password'].errors.required">Please Enter Password.</div>
+                            <div [hidden]="!loginForm.controls['password'].errors.minlength||!loginForm.controls['password'].errors.maxlength">Password length must be greater than 3 and less than 30.</div>
+                            
+                          </div>
+                </div>
+
+                </div>
+                <div class="btnAlign">
+                    <button class="btn btn-primary"   type="button" (click)="onSubmit()">SUBMIT</button><br><br>
+                    <label>Not Yet Registered? </label><a [routerLink]="['/signup']">SignUp Here</a>
+                </div>
+                </form>
+            </div>
+            </div>
+          </div>

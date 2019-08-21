@@ -1,0 +1,106 @@
+<div class="col-sm-6 col-sm-offset-3">
+        <div class="panel panel-primary" >
+            <div class="panel-heading">
+                Sign Up
+            </div>
+            <div class="panel-body">
+              <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+                  <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('frstName').touched ||signUpForm.get('frstName').dirty) &&
+                  !signUpForm.get('frstName').valid}">
+                        <div class="col-md-12">
+                    <input uppercase type="text" class="form-control" formControlName="frstName" placeholder="First Name" required>
+                    <div *ngIf="signUpForm.get('frstName').errors && signUpForm.controls['frstName'].touched" class="help-block">
+                            <div [hidden]="!signUpForm.controls['frstName'].errors.required">First Name is required.</div>
+                          </div>
+                </div>
+                </div>
+                <div class="row form-group" >
+                      <div class="col-md-12">
+                  <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name" >
+                
+              </div>
+              </div>
+              <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('email').touched ||signUpForm.get('email').dirty) &&
+              !signUpForm.get('email').valid}">
+                    <div class="col-md-12">
+                <input type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" formControlName="email" placeholder="Email" required>
+                <div *ngIf="signUpForm.get('email').errors && signUpForm.controls['email'].touched" class="help-block">
+                        <div [hidden]="!signUpForm.controls['email'].errors.required">Email is required.</div>
+                        <div [hidden]="!signUpForm.controls['email'].errors.pattern">Email is invalid.</div>
+                      </div>
+            </div>
+            </div>
+            <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('phoneNum').touched ||signUpForm.get('phoneNum').dirty) &&
+            !signUpForm.get('phoneNum').valid}">
+                  <div class="col-md-12">
+              <input type="number"  class="form-control" formControlName="phoneNum" placeholder="Phone Number">
+              <div *ngIf="signUpForm.get('phoneNum').errors && signUpForm.controls['phoneNum'].touched" class="help-block">
+                      <div [hidden]="!signUpForm.controls['phoneNum'].errors.pattern">Enter Valid Phone Number.</div>
+                    </div>
+          </div>
+          </div>
+          <div formGroupName="address">
+                <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('address.street').touched ||signUpForm.get('address.street').dirty) &&
+                !signUpForm.get('address.street').valid}">
+                      <div class="col-md-12">
+                  <input type="text" class="form-control" formControlName="street" placeholder="Street" required>
+                  <div *ngIf="signUpForm.get('address.street').errors && signUpForm.get('address.street').touched" class="help-block">
+                          <div [hidden]="!signUpForm.get('address.street').errors.required">Street is required.</div>
+                        </div>
+              </div>
+              </div>
+              <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('address.city').touched ||signUpForm.get('address.city').dirty) &&
+              !signUpForm.get('address.city').valid}">
+                    <div class="col-md-12">
+                <input type="text" class="form-control" formControlName="city" placeholder="city" required>
+                <div *ngIf="signUpForm.get('address.city').errors && signUpForm.get('address.city').touched" class="help-block">
+                        <div [hidden]="!signUpForm.get('address.city').errors.required">City is required.</div>
+                      </div>
+            </div>
+            </div>
+            <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('address.state').touched ||signUpForm.get('address.state').dirty) &&
+            !signUpForm.get('address.state').valid}">
+                  <div class="col-md-12">
+              <input type="text" class="form-control" formControlName="state" placeholder="state" required>
+              <div *ngIf="signUpForm.get('address.state').errors && signUpForm.get('address.state').touched" class="help-block">
+                      <div [hidden]="!signUpForm.get('address.state').errors.required">State is required.</div>
+                    </div>
+          </div>
+          </div>
+          </div>
+          <div formGroupName="passwords">
+                <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('passwords.password').touched ||signUpForm.get('passwords.password').dirty) &&
+                !signUpForm.get('passwords.password').valid}" >
+                     <div class="col-md-12">
+                    <input type="password" class="form-control"  formControlName="password" placeholder="Password" required>
+                    <div *ngIf="signUpForm.get('passwords.password').errors && signUpForm.get('passwords.password').touched" class="help-block">
+                            <div [hidden]="!signUpForm.get('passwords.password').errors.required">Please Enter Password.</div>
+                            <div [hidden]="!signUpForm.get('passwords').controls['password'].errors.minlength||!signUpForm.controls['password'].errors.maxlength">Password length must be greater than 3 and less than 30.</div>
+                            
+                          </div>
+                </div>
+
+                </div>
+                <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('passwords').get('cnfrmpassword').touched ||signUpForm.get('passwords').get('cnfrmpassword').dirty) &&
+                !signUpForm.get('passwords').get('cnfrmpassword').valid}" >
+                     <div class="col-md-12">
+                    <input type="password" class="form-control"  formControlName="cnfrmpassword" placeholder="Confirm Password" required>
+                    <div *ngIf="signUpForm.get('passwords').get('cnfrmpassword').errors && signUpForm.get('passwords').controls['cnfrmpassword'].touched" class="help-block">
+                            <div [hidden]="!signUpForm.get('passwords').controls['cnfrmpassword'].errors.required">Please Enter Confirm Password Field.</div>
+                            <div [hidden]="!signUpForm.get('passwords').controls['cnfrmpassword'].errors.passwordSimilarity">Password and Confirm Password doesn't match.</div>
+                            <div [hidden]="!signUpForm.get('passwords').controls['cnfrmpassword'].errors.minlength||!signUpForm.controls['cnfrmpassword'].errors.maxlength">Password length must be greater than 3 and less than 30.</div>
+                            
+                          </div>
+                </div>
+
+                </div>
+                </div>
+
+                <div style="text-align: center;vertical-align: middle">
+                    <button class="btn btn-primary" [disabled]=!signUpForm.valid  type="button" (click)="onSubmit()">Create Account</button><br><br>
+                    <a [routerLink]="['/login']">Login</a>
+                </div>
+                </form>
+            </div>
+            </div>
+          </div>
