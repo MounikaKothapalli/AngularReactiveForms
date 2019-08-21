@@ -1,9 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChildren, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup, FormControlName, AbstractControl } from '@angular/forms';
-import { GenericValidator } from '../shared/generic-validator';
-import { Observable, fromEvent, merge } from 'rxjs';
 
-import { debounceTime } from 'rxjs/operators';
 
 // custom validator for cross field validation
 function passwordSimilarity(c: AbstractControl): {[key: string]: boolean} {
@@ -39,7 +36,7 @@ export class SignupComponent implements OnInit {
         this.signUpForm = this.fb.group({
             frstName: ['', [Validators.required, Validators.pattern(this.noSpecialCharsPatter)]],
             lastName: ['', Validators.pattern(this.noSpecialCharsPatter)],
-            email: ['', [Validators.required, (( Validators.pattern( this.emailPattrn), Validators.maxLength(30), Validators.minLength(3)]],
+            email: ['', [Validators.required,  Validators.pattern( this.emailPattrn), Validators.maxLength(30), Validators.minLength(3)]],
             phoneNum: [''],
             address:  this.fb.group({
                 street: ['', Validators.required],
@@ -49,7 +46,7 @@ export class SignupComponent implements OnInit {
               }),
               passwords: this.fb.group({
                 password: [ '', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-                cnfrmpassword: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]]
+                cnfrmpassword: ['']
               }, {validator: passwordSimilarity})
         });
     }

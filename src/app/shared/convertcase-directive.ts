@@ -1,4 +1,4 @@
-import { Directive, Renderer, ElementRef, forwardRef } from '@angular/core';
+import { Directive, Renderer2, ElementRef, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, DefaultValueAccessor } from '@angular/forms';
 
 
@@ -18,24 +18,23 @@ import { NG_VALUE_ACCESSOR, DefaultValueAccessor } from '@angular/forms';
 })
 export class ConvertCaseDirective extends DefaultValueAccessor {
 
-  constructor(renderer: Renderer, elementRef: ElementRef) {
-    super(renderer, elementRef, false);
-  }
-
-  writeValue(value: any): void {
-    const transformed = this.transformValue(value);
+  constructor(private elRef: ElementRef, private renderer: Renderer2) {
+    super(renderer, elRef, false);
+}
+ writeValue(value: any): void {
+    const transformed = this.convertToUpper(value);
 
     super.writeValue(transformed);
   }
 
   onInput(value: any): void {
-    const transformed = this.transformValue(value);
+    const transformed = this.convertToUpper(value);
 
     super.writeValue(transformed);
     this.onChange(transformed);
   }
 
-  private transformValue(value: any): any {
+  private convertToUpper(value: any): any {
     const result = value && typeof value === 'string'
       ? value.toUpperCase()
       : value;
