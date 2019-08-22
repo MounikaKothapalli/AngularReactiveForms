@@ -23,10 +23,10 @@
               <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('email').touched ||signUpForm.get('email').dirty) &&
               !signUpForm.get('email').valid}">
                     <div class="col-md-12">
-                <input type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" formControlName="email" placeholder="Email" required>
+                <input type="email" pattern="^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$" class="form-control" formControlName="email" placeholder="Email" required>
                 <div *ngIf="signUpForm.get('email').errors && signUpForm.controls['email'].touched" class="help-block">
-                        <div [hidden]="!signUpForm.controls['email'].errors.required">Email is required.</div>
-                        <div [hidden]="!signUpForm.controls['email'].errors.pattern">Email is invalid.</div>
+                        <div [hidden]="!signUpForm.controls['email'].errors.required">Email is required</div>
+                        <div [hidden]="!signUpForm.controls['email'].errors.pattern">Email format should be <i>example@gmail.com</i></div>
                       </div>
             </div>
             </div>
@@ -74,15 +74,15 @@
                      <div class="col-md-12">
                     <input type="password" class="form-control"  formControlName="password" placeholder="Password" required>
                     <div *ngIf="signUpForm.get('passwords.password').errors && signUpForm.get('passwords.password').touched" class="help-block">
-                            <div [hidden]="!signUpForm.get('passwords.password').errors.required">Please Enter Password.</div>
+                            <div [hidden]="!signUpForm.get('passwords').controls['password'].errors.required">Please Enter Password.</div>
                             <div [hidden]="!signUpForm.get('passwords').controls['password'].errors.minlength||!signUpForm.controls['password'].errors.maxlength">Password length must be greater than 3 and less than 30.</div>
                             
                           </div>
                 </div>
 
                 </div>
-                <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('passwords').get('cnfrmpassword').touched ||signUpForm.get('passwords').get('cnfrmpassword').dirty) &&
-                !signUpForm.get('passwords').get('cnfrmpassword').valid}" >
+                <div class="row form-group" [ngClass]="{ 'has-error':(signUpForm.get('passwords.cnfrmpassword').touched ||signUpForm.get('passwords.cnfrmpassword').dirty) &&
+                !signUpForm.get('passwords.cnfrmpassword').valid}" >
                      <div class="col-md-12">
                     <input type="password" class="form-control"  formControlName="cnfrmpassword" placeholder="Confirm Password" required>
                     <div *ngIf="signUpForm.get('passwords').get('cnfrmpassword').errors && signUpForm.get('passwords').controls['cnfrmpassword'].touched" class="help-block">
@@ -95,7 +95,7 @@
                 </div>
 
                 <div style="text-align: center;vertical-align: middle">
-                    <button class="btn btn-primary" style="float:right;" [disabled]=!signUpForm.valid  type="button" (click)="onSubmit()">Create Account</button>
+                    <button class="btn btn-primary" [disabled]="!signUpForm.valid" style="float:right;"   type="button" (click)="onSubmit()">Create Account</button>
                     <button class="btn btn-primary" style="float:left;"  type="button" (click)="resetForm()">Reset</button><br><br>
                    <label>Go Back To</label> <a [routerLink]="['/login']">Login</a>
                 </div>

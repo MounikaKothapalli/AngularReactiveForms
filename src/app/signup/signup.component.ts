@@ -29,20 +29,18 @@ export class SignupComponent implements OnInit {
     emailPattrn: string;
     mobPattern: string;
     constructor(private fb: FormBuilder) {
-        this.emailPattrn = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 // this.mobPattern = '/^\d{10}$/';
     }
     ngOnInit(): void {
         this.signUpForm = this.fb.group({
             frstName: ['', [Validators.required, Validators.pattern(this.noSpecialCharsPatter)]],
             lastName: ['', Validators.pattern(this.noSpecialCharsPatter)],
-            email: ['', [Validators.required,  Validators.pattern( this.emailPattrn), Validators.maxLength(30), Validators.minLength(3)]],
+            email: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(3)]],
             phoneNum: [''],
             address:  this.fb.group({
                 street: ['', Validators.required],
                 city: ['', Validators.required],
-                state: ['', Validators.required],
-                zip: ['', Validators.required],
+                state: ['', Validators.required]
               }),
               passwords: this.fb.group({
                 password: [ '', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
@@ -50,18 +48,10 @@ export class SignupComponent implements OnInit {
               }, {validator: passwordSimilarity})
         });
     }
-    populateData(): void {
-        // assign values to the subset of the formControls
-        this.signUpForm.patchValue({
-            firstName: 'sai',
-            lastName: 'amar',
-            email: 'sai.amar@email.com',
-            confirmEmail: 'sai.amar@email.com'
-        });
-    }
-
     resetForm(): void {
         this.signUpForm.reset();
     }
-
+    onSubmit(): void {
+        console.log('form Submitted Successfully');
+    }
 }
